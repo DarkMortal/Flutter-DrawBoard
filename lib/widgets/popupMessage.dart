@@ -12,7 +12,10 @@ void showMessage(BuildContext context, String message) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(message),
+        title: const Text("Message"),
+        content: Text(message),
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(5))),
         actions: [
           TextButton(
               style: const ButtonStyle(
@@ -29,7 +32,10 @@ Future<bool> confirm(BuildContext context, String message) async {
   return await showDialog(
       context: context,
       builder: (context) => AlertDialog(
-            title: Text(message),
+            title: const Text("Confirm Dialog"),
+            content: Text(message),
+            shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(5))),
             actions: [
               TextButton(
                   style: const ButtonStyle(

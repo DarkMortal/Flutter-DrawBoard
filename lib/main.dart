@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:draw_board/widgets/drawBoard.dart';
 import 'package:draw_board/models/painterClass.dart';
 
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flutter DrawBoard',
+        title: 'Drawboard App',
         debugShowCheckedModeBanner: false,
         scrollBehavior: MyCustomScrollBehavior(),
         themeMode: ThemeMode.system,
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? super.key});
+  const MyHomePage({super.key});
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -38,7 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     Timer(
-        Duration(seconds: 3),
+        const Duration(seconds: 3),
         () => Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => DrawBoard())));
   }
@@ -46,35 +47,30 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-          child: Container(
-              color: Theme.of(context).brightness == Brightness.light
-                  ? Colors.white
-                  : const Color.fromARGB(255, 34, 42, 57),
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              child: Stack(
-                children: [
-                  FlutterLogo(
-                    size: MediaQuery.of(context).size.height,
-                    textColor: Theme.of(context).brightness != Brightness.light
-                        ? Colors.white
-                        : const Color.fromARGB(255, 34, 42, 57),
-                  ),
-                  Center(
-                      child: Text(
-                    'Flutter Drawboard App\n\nDeveloped and maintained by Saptarshi Dey',
-                    style: TextStyle(
-                        backgroundColor:
-                            Theme.of(context).brightness == Brightness.light
-                                ? Colors.white
-                                : const Color.fromARGB(255, 34, 42, 57),
-                        color: Theme.of(context).brightness != Brightness.light
-                            ? Colors.white
-                            : const Color.fromARGB(255, 34, 42, 57)),
-                  ))
-                ],
-              ))),
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
+            color: Color.fromARGB(255, 230, 230, 230)),
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Image.asset(
+                "images/logo.png",
+                height: 200,
+                width: 200,
+              ),
+              const SizedBox(height: 15),
+              Text("Drawboard App\nMade by Saptarshi Dey",
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.abel(
+                      textStyle: const TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.w600,
+                          color: Color.fromARGB(255, 33, 37, 41))))
+            ]),
+      ),
     );
   }
 }

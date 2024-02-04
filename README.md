@@ -2,6 +2,14 @@
 
 A simple drawing app made using flutter
 
+## To build for Linux
+
+    flutter build linux
+
+## To build for Android
+    dart run flutter_launcher_icons
+    flutter build apk --no-shrink
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.

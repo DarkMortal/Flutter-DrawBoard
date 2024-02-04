@@ -51,7 +51,7 @@ Future<Color> getColor(bool isBackground) async {
 Future<double> getBrushWidth() async {
   SharedPreferences _pref = await SharedPreferences.getInstance();
   int? x = _pref.getInt('brush');
-  if (x == null) return 3.0;
+  if (x == null) return 2.0;
   return x.toDouble();
 }
 

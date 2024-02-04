@@ -20,7 +20,7 @@ class DrawBoard extends StatefulWidget {
 
 class DrawBoardState extends State<DrawBoard> {
   Color? tempCol;
-  double brushSize = 3;
+  double brushSize = 2;
   late Paint eraserBrush = Paint();
   bool showAppBar = true, isErase = false;
   late List<Color> backColors = [], foreColors = [];
@@ -131,11 +131,11 @@ class DrawBoardState extends State<DrawBoard> {
                           context: context,
                           builder: (context) => AlertDialog(
                                 title: const Text('About'),
-                                content: Column(
+                                content: const Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     mainAxisSize: MainAxisSize.min,
-                                    children: const [
+                                    children: [
                                       Text(
                                           'A simple drawing application created using flutter\n\nHow to use:\n'),
                                       Text('\u2022 Tap on a colour to use it'),
@@ -167,12 +167,15 @@ class DrawBoardState extends State<DrawBoard> {
           : null,
       bottomNavigationBar: showAppBar
           ? BottomAppBar(
+            height: 250,
+            padding: EdgeInsets.zero,
               child: Container(
+                  margin: EdgeInsets.zero,
                   color: Theme.of(context).brightness == Brightness.light
-                      ? Colors.grey.shade300
+                      ? const Color.fromARGB(255, 232, 232, 250)
                       : const Color.fromARGB(255, 34, 42, 57),
                   padding: const EdgeInsets.all(10),
-                  height: getMin(MediaQuery.of(context).size.height, 220),
+                  height: getMax(MediaQuery.of(context).size.height, 220),
                   child: SingleChildScrollView(
                       scrollDirection: Axis.vertical,
                       child: Column(children: [
