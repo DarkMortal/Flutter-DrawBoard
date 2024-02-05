@@ -25,6 +25,6 @@ samples, guidance on mobile development, and a full API reference.
 
 ## Screenshots
 ![splash2](https://github.com/DarkMortal/Flutter-DrawBoard/assets/67017303/93e634ed-3fcc-41a5-9eb6-1cd69e57cc36)
-![mahadev](https://github.com/DarkMortal/Flutter-DrawBoard/assets/67017303/055aacbd-dda6-47cb-b4f2-29272c73bab7)
-![about](https://github.com/DarkMortal/Flutter-DrawBoard/assets/67017303/6d7fc63c-fc3b-4df6-a4c6-b5fd8e301af5)
+![about](https://github.com/DarkMortal/Flutter-DrawBoard/assets/67017303/50182b42-ae27-483a-9f7d-a95a88398b66)
+![mahadev](https://github.com/DarkMortal/Flutter-DrawBoard/assets/67017303/9ef2e46d-a799-4029-ab38-a113bd77bf21)
 
