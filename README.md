@@ -24,6 +24,7 @@ For help getting started with Flutter development, view the
 samples, guidance on mobile development, and a full API reference.
 
 ## Screenshots
-![splash_screen](https://user-images.githubusercontent.com/67017303/229832862-3fbc9661-ab2c-426a-94ed-5c9768a80e2f.png)
-![demoBoard](https://user-images.githubusercontent.com/67017303/229831551-fa6dbf61-08ea-49f3-a696-adbca597ccf8.png)
-![about](https://user-images.githubusercontent.com/67017303/229833201-80615084-5933-4b43-b496-e798560abc53.png)
+![splash2](https://github.com/DarkMortal/Flutter-DrawBoard/assets/67017303/93e634ed-3fcc-41a5-9eb6-1cd69e57cc36)
+![mahadev](https://github.com/DarkMortal/Flutter-DrawBoard/assets/67017303/055aacbd-dda6-47cb-b4f2-29272c73bab7)
+![about](https://github.com/DarkMortal/Flutter-DrawBoard/assets/67017303/6d7fc63c-fc3b-4df6-a4c6-b5fd8e301af5)
+
