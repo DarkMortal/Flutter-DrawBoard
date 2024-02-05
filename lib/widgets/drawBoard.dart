@@ -70,21 +70,21 @@ class DrawBoardState extends State<DrawBoard> {
     super.dispose();
   }
 
-  void undo(){
+  void undo() {
     /*updatePoints.add(drawPoints[drawPoints.length - 2]);
     drawPoints.removeAt(drawPoints.length - 2);
     setState(() {});*/
     showMessage(context, "Feature yet to be implemented :)");
   }
 
-  void redo(){
+  void redo() {
     /*drawPoints.add(updatePoints.first);
     updatePoints.removeAt(0);
     setState(() {});*/
     showMessage(context, "Feature yet to be implemented :)");
   }
 
-  void clearAll(){
+  void clearAll() {
     drawPoints.clear();
     updatePoints.clear();
     setState(() {});
@@ -185,6 +185,8 @@ class DrawBoardState extends State<DrawBoard> {
                                             '\u2022 Long-tap on a colour to remove it'),
                                         Text(
                                             '\u2022 Adjust the slider to change the width of the brush / pencil'),
+                                        Text(
+                                            '\u2022 Double-click on the canvas to toggle the visibility of controls'),
                                       ]),
                                   actions: [
                                     TextButton(
