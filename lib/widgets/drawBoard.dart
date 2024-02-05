@@ -27,7 +27,7 @@ class DrawBoardState extends State<DrawBoard> {
   late Color foregroundColor = defaultForegroundColors[0],
       backgroundColor = defaultBackgroundColors[0];
 
-  List<dynamic> drawPoints = [];
+  List<dynamic> drawPoints = [], updatePoints = [];
 
   void initColors() async {
     //clearSharedPref(); // don't use in production
@@ -70,105 +70,146 @@ class DrawBoardState extends State<DrawBoard> {
     super.dispose();
   }
 
+  void undo(){
+    /*updatePoints.add(drawPoints[drawPoints.length - 2]);
+    drawPoints.removeAt(drawPoints.length - 2);
+    setState(() {});*/
+    showMessage(context, "Feature yet to be implemented :)");
+  }
+
+  void redo(){
+    /*drawPoints.add(updatePoints.first);
+    updatePoints.removeAt(0);
+    setState(() {});*/
+    showMessage(context, "Feature yet to be implemented :)");
+  }
+
+  void clearAll(){
+    drawPoints.clear();
+    updatePoints.clear();
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) => Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
       floatingActionButton: showAppBar
           ? Padding(
               padding: const EdgeInsets.only(top: 10.0),
-              child: SpeedDial(
-                direction: SpeedDialDirection.down,
-                icon: Icons.menu,
-                activeIcon: Icons.close,
-                iconTheme: const IconThemeData(color: Colors.white),
-                children: [
-                  SpeedDialChild(
-                    child: Icon(isErase
-                        ? Icons.pentagon_rounded
-                        : Icons.square_rounded),
-                    label: "Pencil / Eraser",
-                    onTap: () => setState(() {
-                      isErase = !isErase;
-                    }),
+              child: Wrap(spacing: 5, children: [
+                FloatingActionButton(
+                  heroTag: "Undo button",
+                  onPressed: undo,
+                  backgroundColor: Colors.red,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(100),
                   ),
-                  SpeedDialChild(
-                      child: const Icon(Icons.cleaning_services_rounded),
-                      label: "Clear All",
-                      onTap: () => drawPoints.clear()),
-                  SpeedDialChild(
-                      child: const Icon(Icons.save),
-                      label: "Save",
-                      onTap: () => {
-                            getImage(drawPoints, eraserBrush,
-                                    MediaQuery.of(context).size)
-                                .then((value) async {
-                              var imgBytes = await value.toByteData(
-                                  format: ImageByteFormat.png);
-                              if (Platform.isLinux) {
-                                fs.File('./savedImage.png').writeAsBytesSync(
-                                    imgBytes!.buffer.asInt8List());
-                                showMessage(
-                                    context, 'Image saved successfully :)');
-                              }
-                              if (Platform.isAndroid) {
-                                saveImage(imgBytes!).then((value) {
-                                  if (value)
-                                    showMessage(
-                                        context, 'Image saved successfully');
-                                  else
-                                    showMessage(
-                                        context, "Image couldn't be saved");
-                                });
-                              }
-                            }).catchError((val) {
-                              showMessage(context, 'There was some error');
-                            })
-                          }),
-                  SpeedDialChild(
-                      child: const Icon(Icons.info),
-                      label: "About",
-                      onTap: () => showDialog(
-                          context: context,
-                          builder: (context) => AlertDialog(
-                                title: const Text('About'),
-                                content: const Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Text(
-                                          'A simple drawing application created using flutter\n\nHow to use:\n'),
-                                      Text('\u2022 Tap on a colour to use it'),
-                                      Text(
-                                          '\u2022 Double-tap on a colour to change it'),
-                                      Text(
-                                          '\u2022 Long-tap on a colour to remove it'),
-                                      Text(
-                                          '\u2022 Adjust the slider to change the width of the brush / pencil'),
-                                    ]),
-                                actions: [
-                                  TextButton(
-                                      style: const ButtonStyle(
-                                          backgroundColor:
-                                              MaterialStatePropertyAll(
-                                                  Colors.blueAccent)),
-                                      onPressed: () =>
-                                          Navigator.of(context).pop(),
-                                      child: const Text('Ok',
-                                          style:
-                                              TextStyle(color: Colors.white)))
-                                ],
-                              )))
-                ],
-                spaceBetweenChildren: 5.0,
-                backgroundColor: Colors.orange,
-                activeBackgroundColor: Colors.red,
-              ))
+                  child: const Icon(Icons.undo, color: Colors.white),
+                ),
+                FloatingActionButton(
+                  heroTag: "Redo button",
+                  onPressed: redo,
+                  backgroundColor: Colors.red,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                  child: const Icon(Icons.redo, color: Colors.white),
+                ),
+                SpeedDial(
+                  direction: SpeedDialDirection.down,
+                  icon: Icons.menu,
+                  activeIcon: Icons.close,
+                  iconTheme: const IconThemeData(color: Colors.white),
+                  children: [
+                    SpeedDialChild(
+                      child: Icon(isErase
+                          ? Icons.pentagon_rounded
+                          : Icons.square_rounded),
+                      label: "Pencil / Eraser",
+                      onTap: () => setState(() {
+                        isErase = !isErase;
+                      }),
+                    ),
+                    SpeedDialChild(
+                        child: const Icon(Icons.cleaning_services_rounded),
+                        label: "Clear All",
+                        onTap: clearAll),
+                    SpeedDialChild(
+                        child: const Icon(Icons.save),
+                        label: "Save",
+                        onTap: () => {
+                              getImage(drawPoints, eraserBrush,
+                                      MediaQuery.of(context).size)
+                                  .then((value) async {
+                                var imgBytes = await value.toByteData(
+                                    format: ImageByteFormat.png);
+                                if (Platform.isLinux) {
+                                  fs.File('./savedImage.png').writeAsBytesSync(
+                                      imgBytes!.buffer.asInt8List());
+                                  showMessage(
+                                      context, 'Image saved successfully :)');
+                                }
+                                if (Platform.isAndroid) {
+                                  saveImage(imgBytes!).then((value) {
+                                    if (value)
+                                      showMessage(
+                                          context, 'Image saved successfully');
+                                    else
+                                      showMessage(
+                                          context, "Image couldn't be saved");
+                                  });
+                                }
+                              }).catchError((val) {
+                                showMessage(context, 'There was some error');
+                              })
+                            }),
+                    SpeedDialChild(
+                        child: const Icon(Icons.info),
+                        label: "About",
+                        onTap: () => showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                                  title: const Text('About'),
+                                  content: const Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Text(
+                                            'A simple drawing application created using flutter\n\nHow to use:\n'),
+                                        Text(
+                                            '\u2022 Tap on a colour to use it'),
+                                        Text(
+                                            '\u2022 Double-tap on a colour to change it'),
+                                        Text(
+                                            '\u2022 Long-tap on a colour to remove it'),
+                                        Text(
+                                            '\u2022 Adjust the slider to change the width of the brush / pencil'),
+                                      ]),
+                                  actions: [
+                                    TextButton(
+                                        style: const ButtonStyle(
+                                            backgroundColor:
+                                                MaterialStatePropertyAll(
+                                                    Colors.blueAccent)),
+                                        onPressed: () =>
+                                            Navigator.of(context).pop(),
+                                        child: const Text('Ok',
+                                            style:
+                                                TextStyle(color: Colors.white)))
+                                  ],
+                                )))
+                  ],
+                  spaceBetweenChildren: 5.0,
+                  backgroundColor: Colors.orange,
+                  activeBackgroundColor: Colors.red,
+                ),
+              ]))
           : null,
       bottomNavigationBar: showAppBar
           ? BottomAppBar(
-            height: 250,
-            padding: EdgeInsets.zero,
+              height: 250,
+              padding: EdgeInsets.zero,
               child: Container(
                   margin: EdgeInsets.zero,
                   color: Theme.of(context).brightness == Brightness.light

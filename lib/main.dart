@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:draw_board/widgets/drawBoard.dart';
 import 'package:draw_board/models/painterClass.dart';
@@ -38,10 +39,20 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode
+        .immersive); // for full-screen mode SystemUiMode.mannual for normal mode
+
     Timer(
         const Duration(seconds: 3),
         () => Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => DrawBoard())));
+  }
+
+  @override
+  void dispose() {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: SystemUiOverlay.values); // for normal mode
+    super.dispose();
   }
 
   @override
@@ -50,8 +61,8 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration: const BoxDecoration(
-            color: Color.fromARGB(255, 230, 230, 230)),
+        decoration:
+            const BoxDecoration(color: Color.fromARGB(255, 230, 230, 230)),
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
