@@ -1,6 +1,5 @@
 # Flutter DrawBoard
-
-A simple drawing app made using flutter
+A basic drawing app made using flutter
 
 ## To build for Linux
 
